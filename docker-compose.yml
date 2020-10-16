@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    environment:
+      - PORT=8080
+
+  lint:
+    build:
+      context: .
+      target: tests
+    command: npm run lint
+
+  typecheck:
+    build:
+      context: .
+      target: tests
+    command: npm run typecheck
+
+  unit-tests:
+    build:
+      context: .
+      target: tests
+    command: npm run test -- --maxWorkers=4
+
+  accessibility-tests:
+    build: ./black-box-tests/accessibility-tests
+    depends_on:
+      - web
+    environment:
+      - WEB_HOST=http://web:8080
+    volumes:
+      - ./scripts/wait-for.sh:/usr/src/app/wait-for.sh
+    command: ./wait-for.sh web:8080 -- npm run test:ci
+
+  acceptance-tests:
+    build: black-box-tests/acceptance-tests
+    depends_on:
+      - web
+    environment:
+      - CYPRESS_baseUrl=http://web:8080
+    volumes:
+      - ./scripts/wait-for.sh:/app/wait-for.sh
+      - ./cypress-videos:/app/cypress/videos
+    entrypoint: /bin/sh
+    command: ./wait-for.sh web:8080 -- cypress run

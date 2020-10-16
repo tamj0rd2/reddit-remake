@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "./",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["cypress"]
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

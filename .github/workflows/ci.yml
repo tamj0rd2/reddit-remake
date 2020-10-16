@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 9 * * *'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Linting
+        run: docker-compose -f docker-compose.yml up --build --exit-code-from lint lint
+      - name: Typecheck
+        run: docker-compose -f docker-compose.yml up --build --exit-code-from typecheck typecheck
+      - name: Unit Tests
+        run: docker-compose -f docker-compose.yml up --build --exit-code-from unit-tests unit-tests
+
+
+        # - name: Integration tests
+        #   run: docker-compose -f docker-compose.yml up --build --exit-code-from integration-tests integration-tests
+      - name: Acceptance tests
+        run: docker-compose -f docker-compose.yml up --build --exit-code-from acceptance-tests acceptance-tests
+      - name: Acceptance tests failed
+        if: ${{ failure() }}
+        run: docker-compose -f docker-compose.yml logs -t web
+      - name: Accessibility tests tests
+        run: docker-compose -f docker-compose.yml up --build --exit-code-from accessibility-tests accessibility-tests
+
+  #== uncomment this block to enable deploying to heroku
+  # deploy:
+  #   if: ${{ github.ref == 'refs/heads/master' }}
+  #   needs: tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Deploy to heroku
+  #       run: ./scripts/deploy.sh
+  #       env:
+  #         HEROKU_API_KEY: ${{ secrets.HEROKU_APP_TOKEN }}

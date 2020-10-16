@@ -1,0 +1,14 @@
+{
+  "name": "accessibility-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "pa11y-ci": "^2.4.0"
+  },
+  "scripts": {
+    "test:ci": "pa11y-ci --config pa11y.conf.js",
+    "test": "node ./test.js"
+  },
+  "devDependencies": {}
+}

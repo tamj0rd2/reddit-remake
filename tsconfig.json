@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "~shared/*": ["./src/shared/*"],
+      "~server/*": ["./src/server/*"],
+      "~client/*": ["./src/client/*"]
+    }
+  },
+  "references": [
+    {
+      "path": "./src/client/tsconfig.json"
+    },
+    {
+      "path": "./src/server/tsconfig.json"
+    }
+  ],
+  "exclude": ["out", "dist", ".cache", "node_modules", "black-box-tests"]
+}

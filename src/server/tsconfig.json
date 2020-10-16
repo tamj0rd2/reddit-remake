@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "rootDir": "./",
+    "baseUrl": "../../",
+    "outDir": "../../out/server",
+    "typeRoots": ["../../node_modules/@types"],
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "composite": true,
+    "paths": {
+      "~shared/*": ["./src/shared/*"],
+      "~server/*": ["./src/server/*"]
+    }
+  },
+  "references": [
+    {
+      "path": "../shared/tsconfig.json"
+    }
+  ],
+  "include": ["./**/*.ts"]
+}

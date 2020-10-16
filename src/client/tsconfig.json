@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["esnext", "dom"],
+    "jsx": "react",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "rootDir": "./",
+    "baseUrl": "../../",
+    "outDir": "../../out/client",
+    "typeRoots": ["../../node_modules/@types"],
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "sourceMap": true,
+    "composite": true,
+    "paths": {
+      "~shared/*": ["./src/shared/*"],
+      "~client/*": ["./src/client/*"]
+    }
+  },
+  "include": ["./**/*.ts", "./**/*.tsx"]
+}
